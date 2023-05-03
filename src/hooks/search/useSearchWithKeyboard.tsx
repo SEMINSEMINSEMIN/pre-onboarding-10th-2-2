@@ -1,13 +1,9 @@
 import React from "react";
 import { RecommendDataType } from "../../types/search/index";
 
-const useSearchWithKeyboard = (
-  closeList: () => void,
-  searchInpRef: React.RefObject<HTMLInputElement>
-) => {
+const useSearchWithKeyboard = (searchInpRef: React.RefObject<HTMLInputElement>) => {
   const moveToSearchInput = () => {
     searchInpRef.current?.focus();
-    closeList();
   };
 
   const onArrowDown = (index: number, data: RecommendDataType[]) => {

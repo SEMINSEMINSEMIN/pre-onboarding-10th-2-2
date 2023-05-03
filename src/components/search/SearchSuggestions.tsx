@@ -11,7 +11,7 @@ const SearchSuggestions = () => {
   const { isListVisible, onInpFocus, onInpBlur, closeList } = useToggle();
   const { inpRef, onKeywordClick } = useSearchBarRef(closeList);
   const { recommendData, updateDataRender } = useRecommendData();
-  const searchWithKeyboard = useSearchWithKeyboard(closeList, inpRef);
+  const searchWithKeyboard = useSearchWithKeyboard(inpRef);
 
   // Fix: SearchBar에 전달하는 인수가 너무 많음. 추후 고쳐야 할듯.
   return (
