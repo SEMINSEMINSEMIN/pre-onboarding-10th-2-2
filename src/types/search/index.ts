@@ -1,8 +1,11 @@
 import React from "react";
 
-export interface RecommendDataType {
+export interface SearchResType {
   name: string;
   id: number;
+}
+
+export interface RecommendDataType extends SearchResType {
   ref: React.RefObject<HTMLAnchorElement>;
 }
 

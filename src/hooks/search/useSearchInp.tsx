@@ -1,29 +1,25 @@
-import React, { useEffect } from "react";
-import { RecommendDataType } from "../../types/search";
+import React from "react";
+import debounce from "../../utils/debounce";
+import getRecommendation from "../../api/SearchApi";
+import { SearchResType, RecommendDataType } from "../../types/search";
 
 const useSearchInp = (updateData: (updated: RecommendDataType[]) => void) => {
-  useEffect(() => {
-    const response = [
-      {
-        name: "갑상선염",
-        id: 4376,
-      },
-      {
-        name: "갑상선중독증",
-        id: 4378,
-      },
-      {
-        name: "갑상선 중독",
-        id: 4381,
-      },
-    ];
+  const onInpChange = async (event: React.FormEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    try {
+      const res = await getRecommendation(target.value);
+      const resWithRefs = res.map((e: SearchResType) => {
+        return { ...e, ref: React.createRef<HTMLAnchorElement>() };
+      });
+      updateData(resWithRefs);
+    } catch (error) {
+      console.warn(error);
+    }
+  };
 
-    const responseWithRefs = response.map(e => {
-      return { ...e, ref: React.createRef<HTMLAnchorElement>() };
-    });
+  const debouncedOnInpChange = debounce(onInpChange, 500);
 
-    updateData(responseWithRefs);
-  }, [updateData]);
+  return { debouncedOnInpChange };
 };
 
 export default useSearchInp;

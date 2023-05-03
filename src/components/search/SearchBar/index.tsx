@@ -5,7 +5,7 @@ import { SearchBarProps } from "../../../types/search";
 
 const SearchBar = React.forwardRef((props: SearchBarProps, ref: Ref<HTMLInputElement>) => {
   const { isInpFocused, onInpFocus, onInpBlur, updateData, onInpKeyDown } = props;
-  useSearchInp(updateData);
+  const { debouncedOnInpChange } = useSearchInp(updateData);
 
   return (
     <SearchForm>
@@ -19,6 +19,7 @@ const SearchBar = React.forwardRef((props: SearchBarProps, ref: Ref<HTMLInputEle
         onFocus={onInpFocus}
         onBlur={onInpBlur}
         onKeyDown={onInpKeyDown}
+        onChange={(event: React.FormEvent<HTMLInputElement>) => debouncedOnInpChange(event)}
         ref={ref}
       />
       {isInpFocused && <button type="button">인풋 값 삭제</button>}
