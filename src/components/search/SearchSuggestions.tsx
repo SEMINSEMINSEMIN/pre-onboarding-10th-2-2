@@ -22,8 +22,9 @@ const SearchSuggestions = () => {
         onInpBlur={onInpBlur}
         updateData={updateDataRender}
         onInpKeyDown={(event: React.KeyboardEvent) => {
+          if (event.nativeEvent.isComposing) return;
           if (event.code === "ArrowDown") {
-            recommendData[0].ref.current?.focus();
+            recommendData[0]?.ref.current?.focus();
           }
         }}
         ref={inpRef}
