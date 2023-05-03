@@ -18,7 +18,9 @@ const useSearchInp = (updateData: (updated: RecommendDataType[]) => void) => {
       const res = await requestWithCache(target.value, SEARCH_CACHE_TIME, getRecommendation);
       res.pop();
 
-      const resWithRefs = res.map((e: SearchResType) => {
+      const sliced = res.slice(0, 7);
+
+      const resWithRefs = sliced.map((e: SearchResType) => {
         return { ...e, ref: React.createRef<HTMLAnchorElement>() };
       });
       updateData(resWithRefs);
