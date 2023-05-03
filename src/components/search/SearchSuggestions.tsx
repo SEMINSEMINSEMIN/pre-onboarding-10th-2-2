@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import SearchResCont from "./searchResCont.style";
 import RecommendedList from "./RecommendList/RecommendList";
+import NoSearchResWrapper from "./noSearchRes.style";
 import useToggle from "../../hooks/search/useToggle";
 import useSearchBarRef from "../../hooks/search/useSearchBarRef";
 import useRecommendData from "../../hooks/search/useRecommendData";
@@ -12,6 +13,16 @@ const SearchSuggestions = () => {
   const { inpRef, onKeywordClick } = useSearchBarRef(closeList);
   const { recommendData, updateDataRender } = useRecommendData();
   const searchWithKeyboard = useSearchWithKeyboard(inpRef);
+
+  let SearchRes = <NoSearchResWrapper>검색어 없음</NoSearchResWrapper>;
+  if (recommendData.length)
+    SearchRes = (
+      <RecommendedList
+        onClick={onKeywordClick}
+        data={recommendData}
+        keyDownFunc={searchWithKeyboard}
+      />
+    );
 
   // Fix: SearchBar에 전달하는 인수가 너무 많음. 추후 고쳐야 할듯.
   return (
@@ -31,11 +42,8 @@ const SearchSuggestions = () => {
       />
       {isListVisible && (
         <SearchResCont>
-          <RecommendedList
-            onClick={onKeywordClick}
-            data={recommendData}
-            keyDownFunc={searchWithKeyboard}
-          />
+          <h3>추천 검색어</h3>
+          {SearchRes}
         </SearchResCont>
       )}
     </>
