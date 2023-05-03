@@ -8,12 +8,13 @@ import { SearchResType, RecommendDataType } from "../../types/search";
 const useSearchInp = (updateData: (updated: RecommendDataType[]) => void) => {
   const onInpChange = async (event: React.FormEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
-    try {
-      if (target.value.trim() === "") {
-        updateData([]);
-        return;
-      }
 
+    if (target.value.trim() === "") {
+      updateData([]);
+      return;
+    }
+
+    try {
       const res = await requestWithCache(target.value, SEARCH_CACHE_TIME, getRecommendation);
       res.pop();
 
@@ -22,7 +23,7 @@ const useSearchInp = (updateData: (updated: RecommendDataType[]) => void) => {
       });
       updateData(resWithRefs);
     } catch (error) {
-      console.warn(error);
+      window.alert(error);
     }
   };
 

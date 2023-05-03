@@ -19,15 +19,18 @@ const requestWithCache = async (
   let cachedData = sessionStorage.getItem(key);
 
   if (!cachedData || JSON.parse(cachedData).pop().cacheTimer < now) {
-    console.info("no cache or expired");
-    const res = await request(key);
-    const cacheTimer = getCacheTimer(time);
-    res.push({ cacheTimer });
-    cachedData = JSON.stringify(res);
-    sessionStorage.setItem(key, cachedData);
-  } else {
-    console.info("using cache");
+    try {
+      const res = await request(key);
+      const cacheTimer = getCacheTimer(time);
+      res.push({ cacheTimer });
+      cachedData = JSON.stringify(res);
+      sessionStorage.setItem(key, cachedData);
+    } catch (error) {
+      console.warn(error);
+      throw error;
+    }
   }
+
   return JSON.parse(cachedData);
 };
 
