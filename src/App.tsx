@@ -1,12 +1,15 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
-import "./App.css";
+import { GlobalStyle } from "./app.style";
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+    <>
+      <GlobalStyle />
+      <div className="App">
+        <RouterProvider router={router} />
+      </div>
+    </>
   );
 }
 

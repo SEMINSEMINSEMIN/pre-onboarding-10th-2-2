@@ -1,6 +1,6 @@
 import React from "react";
 import SearchBar from "./SearchBar";
-import SearchResCont from "./searchResCont.style";
+import SearchResCont from "./searchArea.style";
 import RecommendedList from "./RecommendList/RecommendList";
 import NoSearchResWrapper from "./noSearchRes.style";
 import useToggle from "../../hooks/search/useToggle";
