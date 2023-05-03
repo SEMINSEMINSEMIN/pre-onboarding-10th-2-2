@@ -24,13 +24,10 @@ const SearchSuggestions = () => {
       />
     );
 
-  // Fix: SearchBar에 전달하는 인수가 너무 많음. 추후 고쳐야 할듯.
   return (
     <>
       <SearchBar
-        isInpFocused={isListVisible}
-        onInpFocus={onInpFocus}
-        onInpBlur={onInpBlur}
+        focusFuncs={{ onInpFocus, onInpBlur }}
         updateData={updateDataRender}
         onInpKeyDown={(event: React.KeyboardEvent) => {
           if (event.nativeEvent.isComposing) return;

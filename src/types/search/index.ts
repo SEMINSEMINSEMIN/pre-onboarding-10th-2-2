@@ -9,10 +9,13 @@ export interface RecommendDataType extends SearchResType {
   ref: React.RefObject<HTMLAnchorElement>;
 }
 
-export interface SearchBarProps {
-  isInpFocused: boolean;
+interface FocusFuncsType {
   onInpFocus: () => void;
   onInpBlur: (event: React.FocusEvent) => void;
+}
+
+export interface SearchBarProps {
+  focusFuncs: FocusFuncsType;
   updateData: (updated: RecommendDataType[]) => void;
   onInpKeyDown: (event: React.KeyboardEvent) => void;
 }
