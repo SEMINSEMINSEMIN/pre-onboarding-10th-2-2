@@ -7,7 +7,13 @@ const useSearchInp = (updateData: (updated: RecommendDataType[]) => void) => {
   const onInpChange = async (event: React.FormEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     try {
+      if (target.value.trim() === "") {
+        updateData([]);
+        return;
+      }
+
       const res = await getRecommendation(target.value);
+
       const resWithRefs = res.map((e: SearchResType) => {
         return { ...e, ref: React.createRef<HTMLAnchorElement>() };
       });
