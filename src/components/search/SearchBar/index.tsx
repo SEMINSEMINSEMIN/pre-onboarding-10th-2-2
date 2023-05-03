@@ -22,7 +22,9 @@ const SearchBar = React.forwardRef((props: SearchBarProps, ref: Ref<HTMLInputEle
         onChange={(event: React.FormEvent<HTMLInputElement>) => debouncedOnInpChange(event)}
         ref={ref}
       />
-      <button type="submit">검색</button>
+      <button type="submit" onClick={(e: React.FormEvent) => e.preventDefault()}>
+        검색
+      </button>
     </SearchForm>
   );
 });
