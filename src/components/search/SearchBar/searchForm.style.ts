@@ -56,7 +56,7 @@ const SearchForm = styled.form`
     max-width: 320px;
 
     input {
-      padding: 12px 20px;
+      padding: 12px 20px 12px 45px;
     }
   }
 `;
