@@ -1,5 +1,5 @@
 [[redirects]]
 from = "/proxy/*"
-  to = "https://api.clinicaltrialskorea.com"  
+  to = "https://api.clinicaltrialskorea.com/:splat"  
   status = 200
   force = true
