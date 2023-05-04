@@ -4,7 +4,7 @@ import useSearchInp from "../../../hooks/search/useSearchInp";
 import { SearchBarProps } from "../../../types/search";
 
 const SearchBar = React.forwardRef((props: SearchBarProps, ref: Ref<HTMLInputElement>) => {
-  const { focusFuncs, updateData, onInpKeyDown } = props;
+  const { manageToggle, updateData, onInpKeyDown } = props;
   const { debouncedOnInpChange } = useSearchInp(updateData);
 
   return (
@@ -16,13 +16,17 @@ const SearchBar = React.forwardRef((props: SearchBarProps, ref: Ref<HTMLInputEle
         id="searchInp"
         type="text"
         placeholder="질환명을 입력해 주세요."
-        onFocus={focusFuncs.onInpFocus}
-        onBlur={focusFuncs.onInpBlur}
+        onFocus={() => manageToggle(true)}
         onKeyDown={onInpKeyDown}
         onChange={(event: React.FormEvent<HTMLInputElement>) => debouncedOnInpChange(event)}
         ref={ref}
       />
-      <button type="submit" onClick={(e: React.FormEvent) => e.preventDefault()}>
+      <button
+        type="submit"
+        className="hide-click"
+        onFocus={() => manageToggle(false)}
+        onClick={(e: React.FormEvent) => e.preventDefault()}
+      >
         검색
       </button>
     </SearchForm>

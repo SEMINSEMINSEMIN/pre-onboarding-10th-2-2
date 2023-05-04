@@ -1,4 +1,6 @@
 import React from "react";
+import SectionCont from "./searchSectionCont.style";
+import SearchTitle from "./searchTitle.style";
 import SearchBar from "./SearchBar";
 import SearchResCont from "./searchArea.style";
 import RecommendedList from "./RecommendList/RecommendList";
@@ -9,8 +11,8 @@ import useRecommendData from "../../hooks/search/useRecommendData";
 import useSearchWithKeyboard from "../../hooks/search/useSearchWithKeyboard";
 
 const SearchSuggestions = () => {
-  const { isListVisible, onInpFocus, onInpBlur, closeList } = useToggle();
-  const { inpRef, onKeywordClick } = useSearchBarRef(closeList);
+  const { isListVisible, setIsListVisible, closeList } = useToggle();
+  const { inpRef, onKeywordClick } = useSearchBarRef(setIsListVisible);
   const { recommendData, updateDataRender } = useRecommendData();
   const searchWithKeyboard = useSearchWithKeyboard(inpRef);
 
@@ -25,9 +27,12 @@ const SearchSuggestions = () => {
     );
 
   return (
-    <>
+    <SectionCont className="hide-click" onClick={closeList}>
+      <SearchTitle>
+        국내 모든 임상시험 검색하고 <br /> 온라인으로 참여하기
+      </SearchTitle>
       <SearchBar
-        focusFuncs={{ onInpFocus, onInpBlur }}
+        manageToggle={setIsListVisible}
         updateData={updateDataRender}
         onInpKeyDown={(event: React.KeyboardEvent) => {
           if (event.nativeEvent.isComposing) return;
@@ -43,7 +48,7 @@ const SearchSuggestions = () => {
           {SearchRes}
         </SearchResCont>
       )}
-    </>
+    </SectionCont>
   );
 };
 

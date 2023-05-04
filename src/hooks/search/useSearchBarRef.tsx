@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const useSearchBarRef = (closeList: () => void) => {
+const useSearchBarRef = (showList: React.Dispatch<React.SetStateAction<boolean>>) => {
   const inpRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const useSearchBarRef = (closeList: () => void) => {
       inpRef.current.value = target.textContent;
     }
 
-    closeList();
+    showList(false);
 
     setTimeout(() => {
       navigate(`/${path}`);

@@ -3,27 +3,16 @@ import React, { useState } from "react";
 const useToggle = () => {
   const [isListVisible, setIsListVisible] = useState(false);
 
-  const onInpFocus = () => {
-    setIsListVisible(true);
-  };
-
-  const onInpBlur = (event: React.FocusEvent) => {
-    if (event.relatedTarget?.classList[0] === "search-result") {
-      return;
-    } else {
-      setIsListVisible(false);
-    }
-  };
-
-  const closeList = () => {
-    setIsListVisible(false);
+  const closeList = (event: React.MouseEvent) => {
+    const target = event.target as HTMLElement;
+    const classListArr = Array.from(target.classList);
+    if (classListArr.includes("hide-click")) setIsListVisible(false);
   };
 
   return {
     isListVisible,
+    setIsListVisible,
     closeList,
-    onInpFocus,
-    onInpBlur,
   };
 };
 

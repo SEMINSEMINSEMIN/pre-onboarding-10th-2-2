@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import Search from "../components/search";
+// import Search from "../components/search";
 import SearchDetail from "../pages/SearchDetail";
+import SearchSuggestions from "../components/search/SearchSuggestions";
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <Search />,
+    element: <SearchSuggestions />,
   },
   { path: "/:id", element: <SearchDetail /> },
 ]);
